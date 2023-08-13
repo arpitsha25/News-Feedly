@@ -10,12 +10,21 @@ const Signup = () => {
     password: "",
   });
   function handlesignup() {
-    console.log("handle signup", signupdata);
+    fetch("http://localhost:8080/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupdata),
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   }
   return (
     <div className="container">
       <div className="inner-container">
         <div className="inner-container2">
+        <h1>News Feedly</h1>
           <input
             type="text"
             placeholder="Name"
