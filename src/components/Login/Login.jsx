@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [logindata, setlogindata] = useState({ email: "", password: "" });
+  const [rs, setrs] = useState("");
+  const navigate = useNavigate();
 
   function handlelogin() {
     fetch("http://localhost:8080/login", {
@@ -13,9 +16,16 @@ const Login = () => {
       body: JSON.stringify(logindata),
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then((result) => {
+        alert(result.msg);
+        setrs(result.msg);
+      });
   }
-
+  useEffect(() => {
+    if (rs === "success") {
+      navigate("/homepage");
+    }
+  }, [rs]);
   return (
     <div className="container">
       <div className="inner-container">

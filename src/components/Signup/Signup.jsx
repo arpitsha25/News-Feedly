@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Login/Login.css";
 import "./Signup.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const [signupdata, setsignupdata] = useState({
     name: "",
@@ -9,6 +10,8 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [res, setres] = useState();
+  const navigate = useNavigate();
   function handlesignup() {
     fetch("http://localhost:8080/signup", {
       method: "POST",
@@ -18,13 +21,21 @@ const Signup = () => {
       body: JSON.stringify(signupdata),
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then((json) => {
+        alert(json.msg);
+        setres(json.msg);
+      });
   }
+  useEffect(() => {
+    if (res === "success") {
+      navigate("/");
+    }
+  }, [res]);
   return (
     <div className="container">
       <div className="inner-container">
         <div className="inner-container2">
-        <h1>News Feedly</h1>
+          <h1>News Feedly</h1>
           <input
             type="text"
             placeholder="Name"
@@ -64,7 +75,9 @@ const Signup = () => {
             }}
           />
 
-          <button className="btn" onClick={handlesignup}>Signup</button>
+          <button className="btn" onClick={handlesignup}>
+            Signup
+          </button>
           <p>
             Already have an account?
             <Link to="/">Login</Link>
