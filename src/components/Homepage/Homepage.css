@@ -1,0 +1,40 @@
+.homecontainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(36, 28, 44);
+  color: white;
+}
+.homecontainer2 {
+  width: 100vw;
+  height: 5rem;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.hm2 {
+  gap: 1rem;
+}
+.hm2 input {
+  width: 30%;
+  font-size: 1rem;
+  outline: none;
+  padding: 3px;
+}
+.hm2 button {
+  width: 5rem;
+  height: 1.7rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+}
