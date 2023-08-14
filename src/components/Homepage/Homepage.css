@@ -1,10 +1,11 @@
 .homecontainer {
   width: 100vw;
-  height: 100vh;
+  height: auto;
   background-color: rgb(36, 28, 44);
   color: white;
 }
-.homecontainer2 , .homecontainer3{
+.homecontainer2,
+.homecontainer3 {
   width: 100vw;
   height: 5rem;
   background-color: black;
@@ -39,19 +40,65 @@
   border-radius: 2px;
 }
 
-.hm3{
-
+.hm3 {
   font-size: 1rem;
   background-color: rgb(76, 119, 119);
 }
-.hm3 input{
+.hm3 input {
   font-size: 1rem;
 }
-.spn{
+.spn {
   gap: 5px;
   border-radius: 5px;
   display: flex;
   padding: 10px;
   margin: 10px;
   background-color: rgb(45, 54, 62);
+}
+.cardcontainer {
+  width: 100%;
+  background-color: rgb(36, 28, 44);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+.cardcontainer2 {
+  width: 80%;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.ct {
+  border-radius: 5px;
+  width: 20rem;
+  height: 25rem;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+}
+.ct1 {
+  background-color: rgb(76, 119, 119);
+}
+.ct2 {
+  background-color: gray;
+}
+.ct3 {
+  background-color: rgb(142, 49, 49);
+}
+
+.dta {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.dta img {
+  margin: 5px;
+  width: 5rem;
+  height: 5rem;
+}
+
+.title {
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
 }

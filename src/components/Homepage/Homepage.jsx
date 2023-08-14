@@ -40,12 +40,11 @@ const Homepage = () => {
       .then((response) => response.json())
       .then((result) => {
         filtersource(result.data);
-        
+
         setnewsdata(result.data);
       })
       .catch((err) => alert(err));
     setsearchitem("");
-
   }
 
   return (
@@ -89,16 +88,38 @@ const Homepage = () => {
             </>
           );
         })}
-
       </div>
-      <div className="homecontainer4">
-        {filternewsdata.map((item) => {
-          return (
-            <>
-              <p>{item?.title}</p>
-            </>
-          );
-        })}
+
+      <div className="cardcontainer">
+        <div className="cardcontainer2">
+          {filternewsdata.map((item) => {
+            return (
+              <>
+                <div className="ct ct1">
+                  <div className="dta">
+                    <p>
+                      <i>source : {item?.source?.name}</i>
+                    </p>
+                    <h3 className="title">{item?.title}</h3>
+                    <p>
+                      {" "}
+                      <b>Author</b> : {item?.author}
+                    </p>
+                    <p>
+                      <b>Desc : </b>
+                      {item?.description}
+                    </p>
+                    <img src={item?.urlToImage} alt="alt" />
+                    <p>
+                      {item?.content}
+                      <a href={item?.url}>Read more</a>
+                    </p>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
