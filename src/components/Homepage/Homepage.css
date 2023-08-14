@@ -4,7 +4,7 @@
   background-color: rgb(36, 28, 44);
   color: white;
 }
-.homecontainer2 {
+.homecontainer2 , .homecontainer3{
   width: 100vw;
   height: 5rem;
   background-color: black;
@@ -37,4 +37,21 @@
   cursor: pointer;
   border: none;
   border-radius: 2px;
+}
+
+.hm3{
+
+  font-size: 1rem;
+  background-color: rgb(76, 119, 119);
+}
+.hm3 input{
+  font-size: 1rem;
+}
+.spn{
+  gap: 5px;
+  border-radius: 5px;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(45, 54, 62);
 }
