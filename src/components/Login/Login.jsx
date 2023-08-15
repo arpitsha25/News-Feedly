@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [logindata, setlogindata] = useState({ email: "", password: "" });
   const [rs, setrs] = useState("");
+  const [islogin, setislogin] = useState(false);
   const navigate = useNavigate();
 
   function handlelogin() {
@@ -17,6 +18,7 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((result) => {
+        localStorage.setItem("SavedToken", result.token);
         alert(result.msg);
         setrs(result.msg);
       });
@@ -25,7 +27,7 @@ const Login = () => {
     if (rs === "success") {
       navigate("/homepage");
     }
-  }, [rs]);
+  }, [rs, navigate]);
   return (
     <div className="container">
       <div className="inner-container">

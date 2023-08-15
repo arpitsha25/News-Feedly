@@ -1,21 +1,45 @@
 import React, { useEffect, useState } from "react";
 import "./Homepage.css";
+import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const [searchitem, setsearchitem] = useState("");
   const [newsdata, setnewsdata] = useState([]);
   const [source, setsource] = useState([]);
   const [sourceselect, setsourceselect] = useState([]);
   const [filternewsdata, setfilternewsdata] = useState([]);
+  // const [tok, settok] = useState('');
+  const [isauthenticate, setisauthenticate] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (sourceselect.length === 0) {
-      setfilternewsdata(newsdata);
-    } else {
-      setfilternewsdata(
-        newsdata.filter((item) => sourceselect.includes(item?.source?.name))
-      );
-    }
-  }, [sourceselect, newsdata]);
+    let tok = localStorage.getItem("SavedToken")
+    // console.log(tok)
+    if (!tok) {
+      navigate("/");
+    } else(
+      fetch("http://localhost:8080/authenticate", {
+        headers: {
+          Authorization: tok,
+        },
+      })
+        .then((res) => res.json())
+        .then((rest) => {
+          setisauthenticate(rest.success)})
+    )
+      if (sourceselect.length === 0) {
+        setfilternewsdata(newsdata);
+      } else {
+        setfilternewsdata(
+          newsdata.filter((item) => sourceselect.includes(item?.source?.name))
+        );
+      }
+  }, [sourceselect, newsdata, navigate]);
+
+
+  useEffect(()=>{
+    // console.log(isauthenticate)
+    if(isauthenticate === 'true') navigate("/")
+  },[isauthenticate , navigate])
 
   function filtersource(array) {
     const so = array.reduce((source, curr) => {
@@ -33,6 +57,7 @@ const Homepage = () => {
     fetch("http://localhost:8080/searchnews", {
       method: "POST",
       headers: {
+        Authorization: localStorage.getItem("SavedToken"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ searchitem: searchitem }),
@@ -46,7 +71,7 @@ const Homepage = () => {
       .catch((err) => alert(err));
     setsearchitem("");
   }
-
+ 
   return (
     <div className="homecontainer">
       <div className="homecontainer2">
@@ -63,6 +88,14 @@ const Homepage = () => {
             }}
           />
           <button onClick={handlesearch}>SEARCH</button>
+          <button
+            onClick={() => {
+              localStorage.removeItem("SavedToken");
+              navigate('/')
+            }}
+          >
+            LOGOUT
+          </button>
         </div>
       </div>
       <div className="homecontainer3 hm3">
@@ -112,7 +145,7 @@ const Homepage = () => {
                     <img src={item?.urlToImage} alt="alt" />
                     <p>
                       {item?.content}
-                      <a href={item?.url}>Read more</a>
+                      <a href={item?.url} target=" ">Read more</a>
                     </p>
                   </div>
                 </div>
